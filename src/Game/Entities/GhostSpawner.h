@@ -8,6 +8,7 @@ class GhostSpawner: public Entity{
         void spawnGhost(string);
         void keyPressed(int);
         void tick();
+        vector<std::string> colors; 
     private:
         EntityManager* em;
         int spawnCounter = 30*5;

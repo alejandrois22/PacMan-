@@ -25,6 +25,8 @@ void GameState::render() {
 
 void GameState::keyPressed(int key){
 	map->keyPressed(key);
+
+
 }
 
 void GameState::mousePressed(int x, int y, int button){

@@ -112,9 +112,13 @@ void Player::keyPressed(int key){
             die();
             break;
         case 'm':
-            health++;
-            break;
-    }
+		if(health < 3){
+		  health++;
+		    break;
+         }
+	}
+          
+        
 }
 
 void Player::keyReleased(int key){
