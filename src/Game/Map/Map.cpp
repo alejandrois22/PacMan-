@@ -52,3 +52,4 @@ Map::~Map(){
 	delete entityManager;
 	delete gs;
 }
+EntityManager *Map:: getEntityManager(){return entityManager;}

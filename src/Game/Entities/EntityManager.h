@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BoundBlock.h"
-
+#include "Dot.h"
 class EntityManager {
 
 public:
@@ -12,6 +12,7 @@ public:
 	void tick();
 	void render();
 	void setKillable(bool);
+	int getDots();
 
 private:
 	bool killable = false;

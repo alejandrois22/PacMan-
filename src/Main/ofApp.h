@@ -4,7 +4,7 @@
 #include "MenuState.h"
 #include "GameState.h"
 #include "GameOverState.h"
-
+#include "WinState.h"
 class ofApp : public ofBaseApp{
 
 private:
@@ -12,7 +12,7 @@ private:
 	MenuState *menuState;
 	GameState *gameState;
 	GameOverState *gameOverState;
-
+	WinState *winState; 
 
 public:
 		void setup();
@@ -30,5 +30,7 @@ public:
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		
+
 		
 };

@@ -1,6 +1,6 @@
-#include "GameOverState.h"
+#include "WinState.h"
 
-GameOverState::GameOverState() {
+WinState::WinState() {
 	startButton = new Button(ofGetWidth()/2, ofGetHeight()/2, 64, 50, "Start");
 	img1.load("images/pacman.png");
 	vector<ofImage> rightAnimframes;
@@ -12,7 +12,7 @@ GameOverState::GameOverState() {
 	anim = new Animation(10,rightAnimframes);
 
 }
-void GameOverState::tick() {
+void WinState::tick() {
 	startButton->tick();
 	anim->tick();
 	if(startButton->wasPressed()){
@@ -21,41 +21,35 @@ void GameOverState::tick() {
 
 	}
 }
-void GameOverState::render() {
+void WinState::render() {
 	ofDrawBitmapString("Score: " + to_string(score), ofGetWidth()/2, ofGetHeight()/2-300, 50);
 	ofSetBackgroundColor(0, 0, 0);
-	ofSetColor(256, 256, 256);
+	ofSetColor(4, 200, 250);
 	anim->getCurrentFrame().draw(ofGetWidth()/2, ofGetHeight()/2-100, 100, 100);
 	startButton->render();
 
 
 }
 
-void GameOverState::keyPressed(int key){
-
-	switch(key){
-        case 'y':
-		setFinished(true);
-        setNextState("win");
-		break;
-	}
+void WinState::keyPressed(int key){
+	
 }
 
-void GameOverState::mousePressed(int x, int y, int button){
+void WinState::mousePressed(int x, int y, int button){
 	startButton->mousePressed(x, y);
 }
 
-void GameOverState::reset(){
+void WinState::reset(){
 	setFinished(false);
 	setNextState("");
 	startButton->reset();
 }
 
-void GameOverState::setScore(int sc){
+void WinState::setScore(int sc){
     score = sc;
 }
 
-GameOverState::~GameOverState(){
+WinState::~WinState(){
 	delete startButton;
 	delete anim;
 }

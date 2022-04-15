@@ -72,3 +72,4 @@ EntityManager::~EntityManager(){
     ghosts.clear();
     entities.clear();
 }
+	int EntityManager::getDots(){return entities.size();};
