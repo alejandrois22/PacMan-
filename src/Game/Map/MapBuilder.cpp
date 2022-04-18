@@ -9,6 +9,7 @@ MapBuilder::MapBuilder(){
 	ghostC = ofColor(25, 255,0);
 	dotC = ofColor(255, 10, 0);
 	bigDotC = ofColor(167, 0, 150);
+	cherryC = ofColor(0, 0, 255);
 	pacmanSpriteSheet.load("images/Background.png");
 	tempBound.cropFrom(pacmanSpriteSheet, 603,18,16,16);
 	bound.push_back(tempBound);//single

@@ -19,6 +19,7 @@ class MapBuilder {
         ofColor ghostC;
 	    ofColor dotC;
 	    ofColor bigDotC;
+        ofColor cherryC;
         ofImage pacmanSpriteSheet;
         ofImage tempBound;
         ofImage getSprite(ofImage, int, int);
