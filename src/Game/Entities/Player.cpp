@@ -4,6 +4,8 @@
 #include "BigDot.h"
 #include "Ghost.h"
 #include "SpeedPowerUp.h"
+#include "ShowCherry.h"
+#include "CherryPowerUp.h"
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
     spawnX = x;
@@ -173,13 +175,16 @@ void Player::checkCollisions(){
     }
     for(Entity* entity:em->entities){
         if(collides(entity)){
-            if(dynamic_cast<Dot*>(entity) || dynamic_cast<BigDot*>(entity)){
+            if(dynamic_cast<Dot*>(entity) || dynamic_cast<BigDot*>(entity) || dynamic_cast<ShowCherry*>(entity)){
                 entity->remove = true;
                 score += 10;
             }
             if(dynamic_cast<BigDot*>(entity)){
                 score +=20;
                 em->setKillable(true);
+            }
+            if(dynamic_cast<ShowCherry*>(entity)){
+                powerup = new CherryPowerUp(em,this);
             }
         }
     }
@@ -205,6 +210,11 @@ void Player::die(){
 
 void Player::setFast(bool check){
     this->fast = check;
+}
+
+void Player::setCoords(int x1, int y1){
+    x = x1;
+    y = y1;
 }
 
 Player::~Player(){

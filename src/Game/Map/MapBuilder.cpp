@@ -72,6 +72,10 @@ Map* MapBuilder::createMap(ofImage mapImage){
                 BigDot* bigDot = new BigDot(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
                 mapInCreation->addEntity(bigDot);
             }
+			else if(currentPixel == cherryC){
+                ShowCherry* cherry = new ShowCherry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
+                mapInCreation->addEntity(cherry);
+            }
         }
 
     }

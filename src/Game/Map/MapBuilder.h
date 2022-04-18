@@ -5,6 +5,7 @@
 #include "Dot.h"
 #include "BigDot.h"
 #include "Ghost.h"
+#include "ShowCherry.h"
 
 class MapBuilder {
     public:

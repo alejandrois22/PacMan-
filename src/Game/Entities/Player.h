@@ -53,4 +53,5 @@ class Player: public Entity{
         bool getFast();
         void setFast(bool check);
         void setSpeed(int);
+        void setCoords(int x1, int y1);
 };
