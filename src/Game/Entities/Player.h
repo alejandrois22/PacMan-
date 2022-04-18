@@ -2,6 +2,7 @@
 
 #include "Animation.h"
 #include "EntityManager.h"
+#include "PowerUp.h"
 
 enum MOVING {
 	MUP,
@@ -26,6 +27,9 @@ class Player: public Entity{
         Animation *walkLeft;
         Animation *walkRight;
         EntityManager* em;
+        bool fast = false;
+        int steps = 0;
+        PowerUp* powerup = 0;
 
     public:
         Player(int, int, int , int, EntityManager*);
@@ -45,4 +49,8 @@ class Player: public Entity{
         void reset();
         void checkCollisions();
         void die();
+        int getSpeed();
+        bool getFast();
+        void setFast(bool check);
+        void setSpeed(int);
 };

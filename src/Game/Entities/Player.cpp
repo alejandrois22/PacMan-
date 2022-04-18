@@ -3,6 +3,7 @@
 #include "Dot.h"
 #include "BigDot.h"
 #include "Ghost.h"
+#include "SpeedPowerUp.h"
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
     spawnX = x;
@@ -70,6 +71,14 @@ void Player::tick(){
         x+=speed;
         walkRight->tick();
     }
+    if (fast){
+        steps++;
+        if (steps >= 60){
+            fast = false;
+            steps = 0;
+            this->setSpeed(4);
+        }
+    }
 }
 
 void Player::render(){
@@ -116,9 +125,15 @@ void Player::keyPressed(int key){
 		  health++;
 		    break;
          }
-	}
-          
-        
+        case ' ':
+        if (powerup != nullptr){
+            powerup->activate();
+            powerup = 0; 
+    }
+        break;
+        case '-': //Sets the first powerup to SpeedPowerUp.
+        powerup = new SpeedPowerUp(this);
+}
 }
 
 void Player::keyReleased(int key){
@@ -132,10 +147,13 @@ void Player::mousePressed(int x, int y, int button){
 
 int Player::getHealth(){ return health; }
 int Player::getScore(){ return score; }
+int Player::getSpeed(){ return speed; }
+bool Player::getFast(){ return fast; }
 FACING Player::getFacing(){ return facing; }
 void Player::setHealth(int h){ health = h; }
 void Player::setFacing(FACING facing){ this->facing = facing; }
 void Player::setScore(int h){ score = h; }
+void Player::setSpeed(int s){ speed = s; }
 
 void Player::checkCollisions(){
     canMoveUp = true;
@@ -183,6 +201,10 @@ void Player::die(){
     x = spawnX;
     y = spawnY;
 
+}
+
+void Player::setFast(bool check){
+    this->fast = check;
 }
 
 Player::~Player(){
