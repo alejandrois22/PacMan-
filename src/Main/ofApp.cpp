@@ -2,12 +2,13 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetFrameRate(30);
-	ofSetWindowTitle("C++ Game Box");
+	ofSetWindowTitle("PacMan ++ by Alejandro and Sebastian");
 	//States
 	menuState = new MenuState();
 	gameState = new GameState();
 	gameOverState = new GameOverState();
 	winState = new WinState();
+	pauseState = new PauseState();
 	// Initial State
 	currentState = menuState;
 }
@@ -20,20 +21,22 @@ void ofApp::update(){
 			if(currentState->getNextState() == "Menu"){
 				currentState = menuState;
 				currentState->reset();
-
 			}else if(currentState->getNextState() == "Game"){
 				currentState = gameState;
 				currentState->reset();
-
 			}else if(currentState->getNextState() == "over"){
 				gameOverState->setScore(gameState->getFinalScore());
 				currentState = gameOverState;
 				currentState->reset();
-
 			}
 			else if(currentState->getNextState() == "win"){
 				winState->setScore(gameState->getFinalScore());
 				currentState = winState;
+				currentState->reset();
+			}
+			else if (currentState->getNextState() == "pause"){
+				pauseState->setScore(gameState->getFinalScore());
+				currentState = pauseState;
 				currentState->reset();
 			}
 		}

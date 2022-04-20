@@ -1,7 +1,7 @@
 #include "WinState.h"
 
 WinState::WinState() {
-	startButton = new Button(ofGetWidth()/2, ofGetHeight()/2, 64, 50, "Start");
+	startButton = new Button(ofGetWidth()/2-32, ofGetHeight()/2, 64, 50, "You Win!");
 	img1.load("images/pacman.png");
 	vector<ofImage> rightAnimframes;
     ofImage temp;

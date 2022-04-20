@@ -3,6 +3,7 @@
 #include "Dot.h"
 #include "BigDot.h"
 #include "Ghost.h"
+#include "GameState.h"
 #include "SpeedPowerUp.h"
 #include "ShowCherry.h"
 #include "CherryPowerUp.h"

@@ -15,11 +15,14 @@ class GameState: public State{
 		void mousePressed(int x, int y, int button);
 		void keyReleased(int key);
 		int getFinalScore();
+		void pauseEvent();
+		bool getPause();
 	
 	private:
 		ofSoundPlayer music;
 		ofImage mapImage;
 		Map* map;
 		int finalScore=0;
+		bool pause = false;
 
 };
