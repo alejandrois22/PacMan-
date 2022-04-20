@@ -28,8 +28,12 @@ class Player: public Entity{
         Animation *walkRight;
         EntityManager* em;
         bool fast = false;
-        int steps = 0;
+        bool inmortal = false;
+        int stepsSpeed = 0;
+        int stepsMortal = 0;
         PowerUp* powerup = 0;
+        
+        
 
     public:
         Player(int, int, int , int, EntityManager*);
@@ -51,7 +55,12 @@ class Player: public Entity{
         void die();
         int getSpeed();
         bool getFast();
-        void setFast(bool check);
+        bool getInmortal();
+        void setFast(bool checkFast);
+        void setInmortal(bool checkInmortal);
         void setSpeed(int);
         void setCoords(int x1, int y1);
+        bool acceptStrawberry();
+        bool stepsCheck();
+        
 };

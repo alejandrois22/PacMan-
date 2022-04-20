@@ -10,6 +10,7 @@ MapBuilder::MapBuilder(){
 	dotC = ofColor(255, 10, 0);
 	bigDotC = ofColor(167, 0, 150);
 	cherryC = ofColor(0, 0, 255);
+	strawberryC = ofColor(0,255,255);
 	pacmanSpriteSheet.load("images/Background.png");
 	tempBound.cropFrom(pacmanSpriteSheet, 603,18,16,16);
 	bound.push_back(tempBound);//single
@@ -71,11 +72,14 @@ Map* MapBuilder::createMap(ofImage mapImage){
             }else if(currentPixel == bigDotC){
                 BigDot* bigDot = new BigDot(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
                 mapInCreation->addEntity(bigDot);
-            }
-			else if(currentPixel == cherryC){
+            }else if(currentPixel == strawberryC){
+                ShowStrawberry* strawberry = new ShowStrawberry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
+                mapInCreation->addEntity(strawberry);
+            }else if(currentPixel == cherryC){
                 ShowCherry* cherry = new ShowCherry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
                 mapInCreation->addEntity(cherry);
             }
+			
         }
 
     }

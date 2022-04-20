@@ -6,6 +6,8 @@
 #include "SpeedPowerUp.h"
 #include "ShowCherry.h"
 #include "CherryPowerUp.h"
+#include "ShowStrawberry.h"
+#include "StrawberryPowerUp.h"
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
     spawnX = x;
@@ -73,20 +75,20 @@ void Player::tick(){
         x+=speed;
         walkRight->tick();
     }
-    if (fast){
-        steps++;
-        if (steps >= 60){
-            fast = false;
-            steps = 0;
-            this->setSpeed(4);
+    if (inmortal){
+        stepsMortal++;
+        if (stepsMortal >= 60){
+            inmortal = false;
+            stepsMortal = 0;
         }
     }
+    
 }
 
 void Player::render(){
     ofSetColor(256,256,256);
     // ofDrawRectangle(getBounds());
-
+    if (!inmortal){
     if(facing == UP)
         walkUp->getCurrentFrame().draw(x, y, width, height);
     else if(facing == DOWN)
@@ -95,7 +97,7 @@ void Player::render(){
         walkLeft->getCurrentFrame().draw(x, y, width, height);
     else if(facing == RIGHT)
         walkRight->getCurrentFrame().draw(x, y, width, height);
-    
+    }
     ofSetColor(256, 0, 0);
     ofDrawBitmapString("Health: ", ofGetWidth()/2 + 100, 50);
 
@@ -103,6 +105,7 @@ void Player::render(){
         ofDrawCircle(ofGetWidth()/2 + 25*i +200, 50, 10);
     }
     ofDrawBitmapString("Score:"  + to_string(score), ofGetWidth()/2-200, 50);
+    
 }
 
 void Player::keyPressed(int key){
@@ -120,6 +123,7 @@ void Player::keyPressed(int key){
             moving = MRIGHT;;
             break;
         case 'n':
+            if (!inmortal)
             die();
             break;
         case 'm':
@@ -135,6 +139,7 @@ void Player::keyPressed(int key){
         break;
         case '-': //Sets the first powerup to SpeedPowerUp.
         powerup = new SpeedPowerUp(this);
+        break;
 }
 }
 
@@ -157,6 +162,7 @@ void Player::setFacing(FACING facing){ this->facing = facing; }
 void Player::setScore(int h){ score = h; }
 void Player::setSpeed(int s){ speed = s; }
 
+
 void Player::checkCollisions(){
     canMoveUp = true;
     canMoveDown = true;
@@ -175,7 +181,7 @@ void Player::checkCollisions(){
     }
     for(Entity* entity:em->entities){
         if(collides(entity)){
-            if(dynamic_cast<Dot*>(entity) || dynamic_cast<BigDot*>(entity) || dynamic_cast<ShowCherry*>(entity)){
+            if(dynamic_cast<Dot*>(entity) || dynamic_cast<BigDot*>(entity) || dynamic_cast<ShowCherry*>(entity) || dynamic_cast<ShowStrawberry*>(entity) ){
                 entity->remove = true;
                 score += 10;
             }
@@ -186,6 +192,9 @@ void Player::checkCollisions(){
             if(dynamic_cast<ShowCherry*>(entity)){
                 powerup = new CherryPowerUp(em,this);
             }
+            if(dynamic_cast<ShowStrawberry*>(entity)){
+                powerup = new StrawberryPowerUp(em,this);
+            }
         }
     }
     for(Entity* entity:em->ghosts){
@@ -193,13 +202,16 @@ void Player::checkCollisions(){
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
             if(ghost->getKillable())
                 ghost->remove = true;
-            else
+            else {
+                if (!inmortal){
                 die();
+                }
+            }
+                
         }
     }
-
-    
 }
+    
 
 void Player::die(){
     health--;
@@ -208,14 +220,32 @@ void Player::die(){
 
 }
 
-void Player::setFast(bool check){
-    this->fast = check;
+void Player::setFast(bool checkFast){
+    this->fast = checkFast;
 }
+
+void Player::setInmortal(bool checkInmortal)
+{
+    this->inmortal = checkInmortal;
+}
+
+bool Player::acceptStrawberry(){
+    for (Entity* entity:em->ghosts){
+        Ghost* ghost = dynamic_cast<Ghost*>(entity);
+        ofRectangle coords = ghost->getBounds();
+        if (ofDist(coords.getX(),coords.getY(),this->x,this->y) <= 30)
+            return false;
+        
+        }
+    return true;
+    }
+
 
 void Player::setCoords(int x1, int y1){
     x = x1;
     y = y1;
 }
+
 
 Player::~Player(){
     delete walkUp;

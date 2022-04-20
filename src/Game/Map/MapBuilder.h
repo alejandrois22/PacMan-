@@ -6,7 +6,7 @@
 #include "BigDot.h"
 #include "Ghost.h"
 #include "ShowCherry.h"
-
+#include "ShowStrawberry.h"
 class MapBuilder {
     public:
         MapBuilder();
@@ -21,6 +21,7 @@ class MapBuilder {
 	    ofColor dotC;
 	    ofColor bigDotC;
         ofColor cherryC;
+        ofColor strawberryC;
         ofImage pacmanSpriteSheet;
         ofImage tempBound;
         ofImage getSprite(ofImage, int, int);

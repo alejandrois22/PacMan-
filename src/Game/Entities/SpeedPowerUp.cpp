@@ -4,6 +4,9 @@ SpeedPowerUp::SpeedPowerUp(Player* p){
     this->p = p;
 }
 void SpeedPowerUp::activate(){
+    if (p->getSpeed() == 4){
     p->setSpeed(8);
-    p->setFast(true);
+    }
+    else p->setSpeed(4);
+    
     }
