@@ -32,6 +32,7 @@ class Player: public Entity{
         int stepsSpeed = 0;
         int stepsMortal = 0;
         PowerUp* powerup = 0;
+        vector<PowerUp*> powerups;
         
         
 

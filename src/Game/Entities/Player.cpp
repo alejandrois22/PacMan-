@@ -133,13 +133,14 @@ void Player::keyPressed(int key){
 		    break;
          }
         case ' ':
-        if (powerup != nullptr){
+        powerup = powerups[0];
+        if (powerup != nullptr && powerups.size() >= 1){
             powerup->activate();
-            powerup = 0; 
+            powerups.erase(powerups.begin());
     }
         break;
         case '-': //Sets the first powerup to SpeedPowerUp.
-        powerup = new SpeedPowerUp(this);
+        powerups.push_back(new SpeedPowerUp(this));
         break;
 }
 }
@@ -191,10 +192,10 @@ void Player::checkCollisions(){
                 em->setKillable(true);
             }
             if(dynamic_cast<ShowCherry*>(entity)){
-                powerup = new CherryPowerUp(em,this);
+                powerups.push_back(new CherryPowerUp(em,this));
             }
             if(dynamic_cast<ShowStrawberry*>(entity)){
-                powerup = new StrawberryPowerUp(em,this);
+                powerups.push_back(new StrawberryPowerUp(em,this));
             }
         }
     }
