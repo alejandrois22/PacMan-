@@ -7,7 +7,6 @@ class PowerUp{
         virtual void activate() = 0;
         void stepsCheck();
         int getRank();
-
-    private:
+        int compareMethod(PowerUp*);
         int rank = 0;
 };

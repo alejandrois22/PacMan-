@@ -2,6 +2,7 @@
 
 SpeedPowerUp::SpeedPowerUp(Player* p){
     this->p = p;
+    this->rank = 1;
 }
 void SpeedPowerUp::activate(){
     if (p->getSpeed() == 4){
