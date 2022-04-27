@@ -133,10 +133,12 @@ void Player::keyPressed(int key){
 		    break;
          }
         case ' ':
+        if (powerups.size() >= 1){
         powerup = powerups[0];
-        if (powerup != nullptr && powerups.size() >= 1){
-            powerup->activate();
-            powerups.erase(powerups.begin());
+            if (powerup != nullptr){
+                powerup->activate();
+                powerups.erase(powerups.begin());
+        }
     }
         break;
         case '-': //Sets the first powerup to SpeedPowerUp.
