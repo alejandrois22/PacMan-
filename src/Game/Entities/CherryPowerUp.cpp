@@ -3,6 +3,7 @@
 CherryPowerUp::CherryPowerUp(EntityManager* em, Player* p){
     this->em = em;
     this->p = p;
+    this->rank = 2;
 }
 
 void CherryPowerUp::activate(){
