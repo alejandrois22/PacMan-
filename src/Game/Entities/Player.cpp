@@ -9,6 +9,8 @@
 #include "CherryPowerUp.h"
 #include "ShowStrawberry.h"
 #include "StrawberryPowerUp.h"
+#include "ShowUltimate.h"
+#include "UltimatePowerUp.h"
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
     spawnX = x;
@@ -83,7 +85,6 @@ void Player::tick(){
             stepsMortal = 0;
         }
     }
-    
 }
 
 void Player::render(){
@@ -106,6 +107,13 @@ void Player::render(){
         ofDrawCircle(ofGetWidth()/2 + 25*i +200, 50, 10);
     }
     ofDrawBitmapString("Score:"  + to_string(score), ofGetWidth()/2-200, 50);
+
+    ofDrawBitmapString("Current PowerUp:", ofGetWidth()/2-500, 50);
+
+    for (unsigned int i=0; i<powerups.size(); i++){
+        ofDrawBitmapString(powerups[i]->getName() + "\t" + "Rank: " + to_string(powerups[i]->getRank()) , ofGetWidth()/2-500, 80+i*10);
+        cout << powerups[0]->getName();
+    }
     
 }
 
@@ -144,6 +152,10 @@ void Player::keyPressed(int key){
         case '-': //Sets the first powerup to SpeedPowerUp.
         powerups.push_back(new SpeedPowerUp(this));
         break;
+
+        case ']':
+        score += 500;
+        break;
 }
 }
 
@@ -165,6 +177,7 @@ void Player::setHealth(int h){ health = h; }
 void Player::setFacing(FACING facing){ this->facing = facing; }
 void Player::setScore(int h){ score = h; }
 void Player::setSpeed(int s){ speed = s; }
+vector<PowerUp*>& Player::getPowerUps(){return powerups;}
 
 
 void Player::checkCollisions(){
@@ -185,7 +198,7 @@ void Player::checkCollisions(){
     }
     for(Entity* entity:em->entities){
         if(collides(entity)){
-            if(dynamic_cast<Dot*>(entity) || dynamic_cast<BigDot*>(entity) || dynamic_cast<ShowCherry*>(entity) || dynamic_cast<ShowStrawberry*>(entity) ){
+            if(dynamic_cast<Dot*>(entity) || dynamic_cast<BigDot*>(entity) || dynamic_cast<ShowCherry*>(entity) || dynamic_cast<ShowStrawberry*>(entity) || dynamic_cast<ShowUltimatePowerUp*>(entity)){
                 entity->remove = true;
                 score += 10;
             }
@@ -198,6 +211,10 @@ void Player::checkCollisions(){
             }
             if(dynamic_cast<ShowStrawberry*>(entity)){
                 powerups.push_back(new StrawberryPowerUp(em,this));
+            }
+            if(dynamic_cast<ShowUltimatePowerUp*>(entity)){
+                PowerUp* ult = new UltimatePowerUp(this);
+                ult->activate();
             }
         }
     }

@@ -1,13 +1,36 @@
 #include "Map.h"
+#include "ShowUltimate.h"
+
+
+
 
 Map::Map(EntityManager* em){
+	pacmanSpriteSheet.load("images/Background.png");
+
     entityManager = em;
 }
 
+
+
 void Map::tick(){
+	Map* mapInCreation =  new Map(entityManager);
 	entityManager->tick();
 	player->tick();
 	gs->tick();
+
+	if(player->getScore() >=1000 && ultimate == false){
+		ultimate = true;
+		Entity* randomE = entityManager->entities[ofRandom(entityManager->entities.size())];
+		int xPos = randomE->getX();
+		int yPos = randomE->getY();
+
+
+        ShowUltimatePowerUp* ult = new ShowUltimatePowerUp(xPos,yPos,16,16, pacmanSpriteSheet);
+        mapInCreation->addEntity(ult);
+		
+
+
+	}
 
 }
 void Map::render(){
@@ -52,4 +75,7 @@ Map::~Map(){
 	delete entityManager;
 	delete gs;
 }
-EntityManager *Map:: getEntityManager(){return entityManager;}
+
+EntityManager* Map::getEntityManager() {
+	return entityManager;
+}

@@ -63,5 +63,6 @@ class Player: public Entity{
         void setCoords(int x1, int y1);
         bool acceptStrawberry();
         bool stepsCheck();
+        vector<PowerUp*>& getPowerUps();
         
 };
