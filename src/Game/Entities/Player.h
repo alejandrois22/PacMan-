@@ -67,5 +67,6 @@ class Player: public Entity{
         int gx;
         int gy;
         
+        vector<PowerUp*>& getPowerUps();
         
 };

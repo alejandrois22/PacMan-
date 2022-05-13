@@ -1,6 +1,6 @@
 #include "CherryPowerUp.h"
 
-CherryPowerUp::CherryPowerUp(EntityManager* em, Player* p){
+CherryPowerUp::CherryPowerUp(EntityManager* em, Player* p) : PowerUp("Cherry"){
     this->em = em;
     this->p = p;
     this->rank = 2;

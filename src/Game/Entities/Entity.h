@@ -24,6 +24,6 @@ class Entity {
 		bool collides(Entity* entity);
 		ofRectangle getBounds();
 		ofRectangle getBounds(int x, int y);
-		int Getx();
-        int Gety();
+		int getX(){return x;}
+		int getY(){return y;}
 };

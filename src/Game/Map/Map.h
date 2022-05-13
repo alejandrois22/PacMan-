@@ -2,6 +2,7 @@
 
 #include "Player.h"
 #include "GhostSpawner.h"
+#include "EntityManager.h"
 
 class Map{
     public:
@@ -25,5 +26,6 @@ class Map{
       EntityManager *entityManager;
       Player *player;
       GhostSpawner* gs;
-      
+      bool ultimate = false;
+      ofImage pacmanSpriteSheet;
 };

@@ -1,6 +1,6 @@
 #include "StrawberryPowerUp.h"
 
-StrawberryPowerUp::StrawberryPowerUp(EntityManager* em, Player* p){
+StrawberryPowerUp::StrawberryPowerUp(EntityManager* em, Player* p) : PowerUp("Strawberry"){
     this->em = em;
     this->p = p;
     this->rank = 3;

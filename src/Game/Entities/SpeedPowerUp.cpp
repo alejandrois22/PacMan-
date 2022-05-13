@@ -1,6 +1,6 @@
 #include "SpeedPowerUp.h"
 
-SpeedPowerUp::SpeedPowerUp(Player* p){
+SpeedPowerUp::SpeedPowerUp(Player* p) : PowerUp("Speed"){
     this->p = p;
     this->rank = 1;
 }
