@@ -11,6 +11,7 @@ class Eyes: public Entity{
     void tick();
     int gx;
     int gy;  
+
 private:
  Animation* eyesAnim;
 

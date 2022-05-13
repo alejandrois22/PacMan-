@@ -29,10 +29,3 @@ ofRectangle Entity::getBounds(){
 ofRectangle Entity::getBounds(int x, int y){
     return ofRectangle(x, y, width, height);
 }
-
-int Entity::Getx(){
-    return x;
-}
-int Entity::Gety(){
-    return y;
-}

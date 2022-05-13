@@ -225,7 +225,7 @@ void Player::checkCollisions(){
             if(ghost->getKillable()){
                 ghost->remove = true;
                 EyesSprite.load("images/Background.png");
-                Eyes* ey= new Eyes(ghost->Getx(), ghost->Gety(),16, 16,EyesSprite);
+                Eyes* ey= new Eyes(ghost->getX(), ghost->getY(),16, 16,EyesSprite);
                 ey->gx = gx;
                 ey->gy = gy;
                 em->entities.push_back(ey);

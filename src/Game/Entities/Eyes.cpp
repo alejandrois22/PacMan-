@@ -20,20 +20,21 @@ void Eyes::render(){
     eyesAnim->getCurrentFrame().draw(x,y,width,height);
 }
 void Eyes::tick(){
- if(this->x > gx){
+ if(this->x >ofGetWidth()/2){
      x= x - 1;
  }
  else{
-     x = x+1;
+    x = x + 1;
  }
- if(this->y > gy){
+ if(this->y > ofGetHeight()/2){
      y = y-1;
  }
  else{
-    y = y+1;
+    y= y + 1;
  }
- if(this->x == gx && this->y == gy){
+ if(this->x == ofGetWidth()/2 && this->y == ofGetHeight()/2){
     this-> remove = true;
+
  }
 }
 //
