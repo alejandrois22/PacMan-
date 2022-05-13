@@ -13,7 +13,6 @@ Map::Map(EntityManager* em){
 
 
 void Map::tick(){
-	Map* mapInCreation =  new Map(entityManager);
 	entityManager->tick();
 	player->tick();
 	gs->tick();
@@ -26,7 +25,7 @@ void Map::tick(){
 
 
         ShowUltimatePowerUp* ult = new ShowUltimatePowerUp(xPos,yPos,16,16, pacmanSpriteSheet);
-        mapInCreation->addEntity(ult);
+        this->addEntity(ult);
 		
 
 
