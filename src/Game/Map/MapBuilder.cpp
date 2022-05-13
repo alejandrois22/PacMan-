@@ -66,6 +66,9 @@ Map* MapBuilder::createMap(ofImage mapImage){
             }else if(currentPixel == ghostC){
                 GhostSpawner* ghostSpawn = new GhostSpawner(xPos,yPos,pixelMultiplier,pixelMultiplier,entityManager, pacmanSpriteSheet);
                 mapInCreation->setGhostSpawner(ghostSpawn);
+				mapInCreation-> gx = xPos;
+				mapInCreation-> gy = yPos;
+
             }else if(currentPixel == dotC){
                 Dot* dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
                 mapInCreation->addEntity(dot);
@@ -83,6 +86,7 @@ Map* MapBuilder::createMap(ofImage mapImage){
         }
 
     }
+	
     return mapInCreation;
 
 }

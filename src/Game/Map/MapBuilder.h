@@ -11,6 +11,8 @@ class MapBuilder {
     public:
         MapBuilder();
 	    Map* createMap(ofImage);
+        int gx;
+        int gy;
 
 	private:
         vector<ofImage> bound;

@@ -18,7 +18,9 @@ class Map{
 		  void mousePressed(int x, int y, int button);
 		  void keyReleased(int key);
       EntityManager *getEntityManager();
-
+      int gx;
+      int gy;
+      
     private:
       EntityManager *entityManager;
       Player *player;

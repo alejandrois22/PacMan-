@@ -22,6 +22,7 @@ class Player: public Entity{
         MOVING moving;
         FACING facing = DOWN;
         ofImage up, down, left, right;
+        ofImage EyesSprite;
         Animation *walkUp;
         Animation *walkDown;
         Animation *walkLeft;
@@ -33,7 +34,7 @@ class Player: public Entity{
         int stepsMortal = 0;
         PowerUp* powerup = 0;
         vector<PowerUp*> powerups;
-        
+       
         
 
     public:
@@ -63,5 +64,8 @@ class Player: public Entity{
         void setCoords(int x1, int y1);
         bool acceptStrawberry();
         bool stepsCheck();
+        int gx;
+        int gy;
+        
         
 };

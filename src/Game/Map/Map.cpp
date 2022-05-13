@@ -38,6 +38,8 @@ void Map::addEntity(Entity* e){
 }
 void Map::setPlayer(Player* p){
     player = p;
+	player->gx = gx;
+	player->gy = gy;
 }
 
 Player* Map::getPlayer(){

@@ -3,6 +3,7 @@
 #include "Dot.h"
 #include "BigDot.h"
 #include "Ghost.h"
+#include "Eyes.h"
 #include "GameState.h"
 #include "SpeedPowerUp.h"
 #include "ShowCherry.h"
@@ -204,8 +205,14 @@ void Player::checkCollisions(){
     for(Entity* entity:em->ghosts){
         if(collides(entity)){
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
-            if(ghost->getKillable())
+            if(ghost->getKillable()){
                 ghost->remove = true;
+                EyesSprite.load("images/Background.png");
+                Eyes* ey= new Eyes(ghost->Getx(), ghost->Gety(),16, 16,EyesSprite);
+                ey->gx = gx;
+                ey->gy = gy;
+                em->entities.push_back(ey);
+            }
             else {
                 if (!inmortal){
                 die();

@@ -1,9 +1,14 @@
 #include "Ghost.h"
 #include "BoundBlock.h"
+#include "Eyes.h"
 
 Ghost::Ghost(int x, int y, int width, int height, ofImage spriteSheet, EntityManager* em, string color): Entity(x, y, width, height){
     this->em = em;
     vector<ofImage> killableFrames;
+    vector<ofImage> eyeFrames;
+    //vector<vector<int>>
+    //dionel.martinez@upr.edu
+
     ofImage temp;
     temp.cropFrom(spriteSheet, 584, 64, 16, 16);
     killableFrames.push_back(temp);
@@ -14,7 +19,7 @@ Ghost::Ghost(int x, int y, int width, int height, ofImage spriteSheet, EntityMan
     temp.cropFrom(spriteSheet, 632, 64, 16, 16);
     killableFrames.push_back(temp);
     killableAnim = new Animation(10, killableFrames);
-
+    
     if(color == "red")      sprite.cropFrom(spriteSheet,456,64,16,16);
     else if(color=="pink")  sprite.cropFrom(spriteSheet,456,78,16,16);
     else if(color=="cyan")  sprite.cropFrom(spriteSheet,456,96,16,16);
@@ -69,6 +74,7 @@ void Ghost::render(){
 
 bool Ghost::getKillable(){
     return killable;
+    //return to ghostSpawner
 }
 void Ghost::setKillable(bool k){
     killable = k;
@@ -99,6 +105,7 @@ void Ghost::checkCollisions(){
         }
     }
 }
+
 
 Ghost::~Ghost(){
     delete killableAnim;
