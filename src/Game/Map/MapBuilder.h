@@ -20,12 +20,14 @@ class MapBuilder {
         ofColor boundBoundBlock;
         ofColor pacman;
         ofColor ghostC;
-	    ofColor dotC;
-	    ofColor bigDotC;
+	ofColor dotC;
+	ofColor bigDotC;
         ofColor cherryC;
         ofColor strawberryC;
         ofImage pacmanSpriteSheet;
         ofImage tempBound;
         ofImage getSprite(ofImage, int, int);
         EntityManager* entityManager;
+        vector<int> gps;
+        vector<double> gpsCoords;
 };

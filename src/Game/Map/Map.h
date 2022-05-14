@@ -21,6 +21,8 @@ class Map{
       EntityManager *getEntityManager();
       int gx;
       int gy;
+      void setMaze(vector<vector<int>> maze){ this->maze = maze; }
+      void setOffsets(int mult, int xOff, int yOff){ multiplier = mult; this->xOff = xOff; this->yOff = yOff; }
       
     private:
       EntityManager *entityManager;
@@ -28,4 +30,9 @@ class Map{
       GhostSpawner* gs;
       bool ultimate = false;
       ofImage pacmanSpriteSheet;
+      vector<vector<int>> maze;
+      int multiplier, xOff, yOff;
+      bool gps = false;
+      int gpsCounter = 0; 
+      vector<vector<int>> path;
 };

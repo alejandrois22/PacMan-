@@ -115,7 +115,9 @@ void Player::render(){
         ofDrawBitmapString(powerups[i]->getName() + "\t" + "Rank: " + to_string(powerups[i]->getRank()) , ofGetWidth()/2-500, 80+i*10);
         cout << powerups[0]->getName();
     }
-    
+    if (!acceptStrawberry()){
+    ofDrawBitmapString("Too close to Ghost", ofGetWidth()/2+345,80);
+    }
 }
 
 void Player::keyPressed(int key){
@@ -261,12 +263,11 @@ bool Player::acceptStrawberry(){
     for (Entity* entity:em->ghosts){
         Ghost* ghost = dynamic_cast<Ghost*>(entity);
         ofRectangle coords = ghost->getBounds();
-        if (ofDist(coords.getX(),coords.getY(),this->x,this->y) <= 30)
+        if (ofDist(coords.getX(),coords.getY(),this->x,this->y) <= 45)
             return false;
-        
         }
     return true;
-    }
+}
 
 
 void Player::setCoords(int x1, int y1){

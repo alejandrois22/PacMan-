@@ -32,6 +32,7 @@ class Player: public Entity{
         bool inmortal = false;
         int stepsSpeed = 0;
         int stepsMortal = 0;
+        bool close = false;
         PowerUp* powerup = 0;
         vector<PowerUp*> powerups;
        
@@ -66,7 +67,6 @@ class Player: public Entity{
         bool stepsCheck();
         int gx;
         int gy;
-        
         vector<PowerUp*>& getPowerUps();
         
 };

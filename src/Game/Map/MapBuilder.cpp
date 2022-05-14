@@ -52,14 +52,20 @@ Map* MapBuilder::createMap(ofImage mapImage){
 
 	ofPixels pixels = mapImage.getPixels();
 	Map* mapInCreation =  new Map(entityManager);
+	mapInCreation->setOffsets(pixelMultiplier, xOffset, yOffset);
+	vector<vector<int>> maze;
     for (int i = 0; i < mapImage.getWidth(); i++) {
+		maze.push_back(vector<int>());
         for (int j = 0; j < mapImage.getHeight(); j++) {
+			bool foundWall = false;
             ofColor currentPixel = pixels.getColor(i, j);
             int xPos = i*pixelMultiplier + xOffset;
             int yPos = j*pixelMultiplier + yOffset;
+
             if(currentPixel == boundBoundBlock){
                 BoundBlock* BoundBoundBlock = new BoundBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,getSprite(mapImage,i,j));
                 mapInCreation->addBoundBlock(BoundBoundBlock);
+				foundWall = true;
             }else if(currentPixel == pacman){
                 Player* PacMan = new Player(xPos,yPos,pixelMultiplier,pixelMultiplier, entityManager);
 				mapInCreation->setPlayer(PacMan);
@@ -68,7 +74,6 @@ Map* MapBuilder::createMap(ofImage mapImage){
                 mapInCreation->setGhostSpawner(ghostSpawn);
 				mapInCreation-> gx = xPos;
 				mapInCreation-> gy = yPos;
-
             }else if(currentPixel == dotC){
                 Dot* dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
                 mapInCreation->addEntity(dot);
@@ -81,14 +86,12 @@ Map* MapBuilder::createMap(ofImage mapImage){
             }else if(currentPixel == cherryC){
                 ShowCherry* cherry = new ShowCherry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
                 mapInCreation->addEntity(cherry);
-            }
-			
+            }	
+			maze[i].push_back(foundWall? 0:1);
         }
-
     }
-	
+	mapInCreation->setMaze(maze);
     return mapInCreation;
-
 }
 
 ofImage MapBuilder::getSprite(ofImage mapImage, int i, int j){
@@ -102,7 +105,6 @@ ofImage MapBuilder::getSprite(ofImage mapImage, int i, int j){
 		leftPixel = pixels.getColor(i - 1, j);
 	}else{
 		leftPixel = pacman;
-
 	}
 	if (i<mapImage.getWidth()-1) {
 		rightPixel = pixels.getColor(i + 1, j);
@@ -120,7 +122,6 @@ ofImage MapBuilder::getSprite(ofImage mapImage, int i, int j){
 		downPixel = pixels.getColor(i, j + 1);
 	}else{
 		downPixel = pacman;
-
 	}
 
 	if (currentPixel != leftPixel && currentPixel != upPixel && currentPixel != downPixel && currentPixel == rightPixel){
