@@ -9,3 +9,5 @@ Y - Debug Win State
 N - Remove lives
 M - Add lives
 P - Pause game
+L - Activate PacMan GPS
+] - Debug Score (+500 Score)
